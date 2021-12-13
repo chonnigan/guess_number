@@ -2,29 +2,41 @@ import 'dart:io';
 import 'dart:math';
 
 void main() {
-  var i = 0;
   var r = Random();
   var answer = r.nextInt(100);
   int count = 0;
-  while (true) {
-    stdout.write("Please guess the number: ");
+  print('╔══════════════════════════════════════════');
+  print('║             GUESS THE NUMBER             ');
+  while(true){
+    print('║──────────────────────────────────────────');
+    stdout.write("║ Guess the number between 1 and 100: ");
     var input = stdin.readLineSync();
     var guess = int.tryParse(input!);
     if (guess == answer) {
-      print("CORRECT");
+      stdout.write('║ ➜ $guess is CORRECT, ');
       count++;
       break;
-    } else {
-      if (guess! > answer) {
-        print('TRY AGAIN, $guess is TOO HIGH');
-        count++;
-      } else if (guess < answer) {
-        print('TRY AGAIN, $guess is TOO LOW');
-        count++;
-      }
+    }
+      else if(guess==null){
+      guess = int.tryParse(input);
+    }else if(guess>100 || guess<=0 ){
+      guess = int.tryParse(input);
+    }
+    else{
+    if (guess > answer) {
+      print('║ ➜ TRY AGAIN, $guess is TOO HIGH ▲');
+      count++;
+    } else if (guess < answer) {
+      print('║ ➜ TRY AGAIN, $guess is TOO LOW ▼');
+      count++;
+    }
     }
   }
+
   if (count >= 1) {
-    print('Total guesses: $count');
+    print('★ Total guesses: $count');
+    print('║──────────────────────────────────────────');
   }
+  print('║                 THE END                  ');
+  print('╚══════════════════════════════════════════');
 }
